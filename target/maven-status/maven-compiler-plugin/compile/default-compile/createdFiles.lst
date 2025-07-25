@@ -1,0 +1,8 @@
+com\ds\entitytosql\Entidad_Un_Solo_Campo.class
+com\ds\entitytosql\Entidad_Ejemplo.class
+com\ds\entitytosql\Entitytosql.class
+com\ds\entitytosql\helpers\OrderByEntity.class
+com\ds\entitytosql\helpers\WhereOperParam.class
+com\ds\entitytosql\helpers\ReflectorEntityToSQL$1.class
+com\ds\entitytosql\helpers\EUpperLower.class
+com\ds\entitytosql\helpers\ReflectorEntityToSQL.class
