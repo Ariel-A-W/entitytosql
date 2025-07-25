@@ -1,33 +1,9 @@
 package com.ds.entitytosql.helpers;
 
 import java.lang.reflect.Field;
-//import java.lang.reflect.Method;
-//import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 
 public class ReflectorEntityToSQL {
-//    public void ConvertEntitySQL(Class<?> clazz) {
-//        System.out.println("Nombre de la clase: " + clazz.getSimpleName());
-//        System.out.println("\n--- Campos declarados ---");
-//
-//        Field[] fields = clazz.getDeclaredFields();
-//        for (Field field : fields) {
-//            System.out.println("- " + field.getType().getSimpleName() + " " + field.getName());
-//        }
-//
-//        System.out.println("\n--- Métodos Getters y Setters ---");
-//
-//        Method[] methods = clazz.getDeclaredMethods();
-//        for (Method method : methods) {
-//            if (Modifier.isPublic(method.getModifiers())) {
-//                String name = method.getName();
-//                if ((name.startsWith("get") || name.startsWith("set")) && method.getParameterCount() <= 1) {
-//                    System.out.println("- " + name + "()");
-//                }
-//            }
-//        }
-//    }
-    
     // *************************************************************************
     // *** SELECT **************************************************************
     // *************************************************************************    
