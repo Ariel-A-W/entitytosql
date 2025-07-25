@@ -18,9 +18,13 @@ public class Entitytosql {
         
         var rf = new ReflectorEntityToSQL(); 
 
-        // Pruebas con SELECT
+        // Pruebas con SELECT           
         String sql = rf.get_SELECT(Entidad_Ejemplo.class);        
         System.out.println(sql);       
+        
+        sql = rf.get_SELECT(Entidad_Un_Solo_Campo.class);        
+        System.out.println(sql);          
+        
         // Forzar todo a mayúsculas.
         sql = rf.get_SELECT(Entidad_Ejemplo.class, EUpperLower.UPPER);        
         System.out.println(sql);
@@ -88,6 +92,38 @@ public class Entitytosql {
         arrOB64.add(new OrderByEntity("nombre", "ASC"));   
         arrOB64.add(new OrderByEntity("email", "DESC"));
         sql = rf.get_SELECT_WHERE_ORDERBY(Entidad_Ejemplo.class, EUpperLower.UPPER, arrWH6, arrOB64); 
+        System.out.println(sql);   
+        
+        // Case INSERT INTO        
+        sql = rf.get_INSERT_INTO(Entidad_Ejemplo.class, null, "?");
+        System.out.println(sql);
+        sql = rf.get_INSERT_INTO(Entidad_Ejemplo.class, null, "?", EUpperLower.UPPER);
+        System.out.println(sql);           
+        String[] exclds = {"id", "email"};        
+        sql = rf.get_INSERT_INTO(Entidad_Ejemplo.class, exclds, "?", EUpperLower.UPPER);
+        System.out.println(sql);   
+        
+        // Case Delete         
+        var arrDELWH1 = new ArrayList<WhereOperParam>(); 
+        arrDELWH1.add(new WhereOperParam("id", "=", "?"));
+        sql = rf.get_DELETE(Entidad_Ejemplo.class, arrDELWH1);
         System.out.println(sql);         
+        var arrDELWH2 = new ArrayList<WhereOperParam>(); 
+        arrDELWH2.add(new WhereOperParam("id", "=", "?"));
+        sql = rf.get_DELETE(Entidad_Ejemplo.class, arrDELWH1, EUpperLower.UPPER);
+        System.out.println(sql); 
+        
+        // Case UPDATE        
+        var arrUPDWH1 = new ArrayList<WhereOperParam>(); 
+        arrUPDWH1.add(new WhereOperParam("id", "=", "?"));
+        sql = rf.get_UPDATE(Entidad_Ejemplo.class, arrUPDWH1);
+        System.out.println(sql);         
+        var arrUPDWH2 = new ArrayList<WhereOperParam>(); 
+        arrUPDWH2.add(new WhereOperParam("id", "=", "?"));
+        arrUPDWH2.add(new WhereOperParam("nombre", "=", "?"));        
+        sql = rf.get_UPDATE(Entidad_Ejemplo.class, arrUPDWH2);
+        System.out.println(sql);           
+        sql = rf.get_UPDATE(Entidad_Ejemplo.class, arrUPDWH2, EUpperLower.UPPER);
+        System.out.println(sql);
     }
 }

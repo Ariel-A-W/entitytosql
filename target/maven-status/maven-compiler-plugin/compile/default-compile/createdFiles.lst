@@ -1,3 +1,4 @@
+com\ds\entitytosql\Entidad_Un_Solo_Campo.class
 com\ds\entitytosql\Entidad_Ejemplo.class
 com\ds\entitytosql\Entitytosql.class
 com\ds\entitytosql\helpers\OrderByEntity.class
