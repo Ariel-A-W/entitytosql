@@ -18,112 +18,126 @@ public class Entitytosql {
         
         var rf = new ReflectorEntityToSQL(); 
 
-        // Pruebas con SELECT           
-        String sql = rf.get_SELECT(Entidad_Ejemplo.class);        
+        // Pruebas con SELECT  
+        rf = new ReflectorEntityToSQL();
+        rf.set_DISTINCT(true);
+        String sql = rf.get_SELECT("NST", Entidad_Ejemplo.class);        
         System.out.println(sql);       
         
-        sql = rf.get_SELECT(Entidad_Un_Solo_Campo.class);        
+        rf = new ReflectorEntityToSQL();
+        sql = rf.get_SELECT(null, Entidad_Un_Solo_Campo.class);        
         System.out.println(sql);          
         
         // Forzar todo a mayúsculas.
-        sql = rf.get_SELECT(Entidad_Ejemplo.class, EUpperLower.UPPER);        
+        rf = new ReflectorEntityToSQL();
+        sql = rf.get_SELECT("CHEN", Entidad_Ejemplo.class, EUpperLower.UPPER);        
         System.out.println(sql);
         
         // Pruebas coi SELECT ORDER BY 
         // Un Orden
+        rf = new ReflectorEntityToSQL();
         var arrOB1 = new ArrayList<OrderByEntity>(); 
         arrOB1.add(new OrderByEntity("nombre", "ASC"));
-        sql = rf.get_SELECT_ORDERBY(Entidad_Ejemplo.class, arrOB1); 
+        sql = rf.get_SELECT_ORDERBY("XEE", Entidad_Ejemplo.class, arrOB1); 
         System.out.println(sql);       
         // Doble Orden
+        rf = new ReflectorEntityToSQL();
         var arrOB2 = new ArrayList<OrderByEntity>(); 
         arrOB2.add(new OrderByEntity("email", "ASC"));
         arrOB2.add(new OrderByEntity("nombre", "DESC"));
-        sql = rf.get_SELECT_ORDERBY(Entidad_Ejemplo.class, arrOB2); 
+        sql = rf.get_SELECT_ORDERBY("ASP", Entidad_Ejemplo.class, arrOB2); 
         System.out.println(sql);  
         // Un Orden forzado a Maypúsculas. 
+        rf = new ReflectorEntityToSQL();
         var arrOB3 = new ArrayList<OrderByEntity>(); 
         arrOB3.add(new OrderByEntity("nombre", "ASC"));
-        sql = rf.get_SELECT_ORDERBY(Entidad_Ejemplo.class, EUpperLower.UPPER, arrOB3); 
+        sql = rf.get_SELECT_ORDERBY(null, Entidad_Ejemplo.class, EUpperLower.UPPER, arrOB3); 
         System.out.println(sql);         
         // Doble puesto en Mayúsculas.
+        rf = new ReflectorEntityToSQL();
         var arrOB4 = new ArrayList<OrderByEntity>(); 
         arrOB4.add(new OrderByEntity("email", "ASC"));
         arrOB4.add(new OrderByEntity("nombre", "DESC"));
-        sql = rf.get_SELECT_ORDERBY(Entidad_Ejemplo.class, EUpperLower.UPPER, arrOB4); 
+        rf.set_DISTINCT(true);
+        sql = rf.get_SELECT_ORDERBY(null, Entidad_Ejemplo.class, EUpperLower.UPPER, arrOB4); 
         System.out.println(sql);  
         
         // Pruebas con SELECT WHERE 
         // Un WHERE
+        rf = new ReflectorEntityToSQL();
         var arrWH1 = new ArrayList<WhereOperParam>(); 
         arrWH1.add(new WhereOperParam("id", "LIKE", "?"));
-        sql = rf.get_SELECT_WHERE(Entidad_Ejemplo.class, arrWH1); 
+        sql = rf.get_SELECT_WHERE(null, Entidad_Ejemplo.class, arrWH1); 
         System.out.println(sql);
         // Doble WHERE 
+        rf = new ReflectorEntityToSQL();
         var arrWH2 = new ArrayList<WhereOperParam>(); 
         arrWH2.add(new WhereOperParam("id", "==", "?"));
         arrWH2.add(new WhereOperParam("nombre", "LIKE", "'%?'"));
-        sql = rf.get_SELECT_WHERE(Entidad_Ejemplo.class, arrWH2); 
+        sql = rf.get_SELECT_WHERE(null, Entidad_Ejemplo.class, arrWH2); 
         System.out.println(sql);   
         var arrWH3 = new ArrayList<WhereOperParam>(); 
         arrWH3.add(new WhereOperParam("id", "==", "?"));
         arrWH3.add(new WhereOperParam("nombre", "LIKE", "'%?'"));
-        sql = rf.get_SELECT_WHERE(Entidad_Ejemplo.class, EUpperLower.UPPER, arrWH3); 
+        sql = rf.get_SELECT_WHERE(null, Entidad_Ejemplo.class, EUpperLower.UPPER, arrWH3); 
         System.out.println(sql);         
         // WHERE y ORDER BY 
+        rf = new ReflectorEntityToSQL();
         var arrWH4 = new ArrayList<WhereOperParam>(); 
         var arrOB44 = new ArrayList<OrderByEntity>(); 
         arrWH4.add(new WhereOperParam("nombre", "LIKE", "'%?'"));
         arrOB44.add(new OrderByEntity("nombre", "ASC"));        
-        sql = rf.get_SELECT_WHERE_ORDERBY(Entidad_Ejemplo.class, arrWH4, arrOB44); 
+        sql = rf.get_SELECT_WHERE_ORDERBY(null, Entidad_Ejemplo.class, arrWH4, arrOB44); 
         System.out.println(sql);    
-        // Más de un WHERE y ORDER BY
+        // Más de un WHERE y ORDER BY 
+        rf = new ReflectorEntityToSQL();
         var arrWH5 = new ArrayList<WhereOperParam>(); 
         var arrOB54 = new ArrayList<OrderByEntity>(); 
         arrWH5.add(new WhereOperParam("email", "LIKE", "'%?'"));
         arrOB54.add(new OrderByEntity("nombre", "ASC"));   
         arrOB54.add(new OrderByEntity("email", "DESC"));
-        sql = rf.get_SELECT_WHERE_ORDERBY(Entidad_Ejemplo.class, arrWH5, arrOB54); 
+        sql = rf.get_SELECT_WHERE_ORDERBY(null, Entidad_Ejemplo.class, arrWH5, arrOB54); 
         System.out.println(sql);    
-        // Más de un WHERE y ORDER BY pasado a Mayúsculas
+        // Más de un WHERE y ORDER BY pasado a Mayúsculas 
+        rf = new ReflectorEntityToSQL();
         var arrWH6 = new ArrayList<WhereOperParam>(); 
         var arrOB64 = new ArrayList<OrderByEntity>(); 
         arrWH6.add(new WhereOperParam("email", "LIKE", "'%?'"));
         arrOB64.add(new OrderByEntity("nombre", "ASC"));   
         arrOB64.add(new OrderByEntity("email", "DESC"));
-        sql = rf.get_SELECT_WHERE_ORDERBY(Entidad_Ejemplo.class, EUpperLower.UPPER, arrWH6, arrOB64); 
+        sql = rf.get_SELECT_WHERE_ORDERBY("NSS", Entidad_Ejemplo.class, EUpperLower.UPPER, arrWH6, arrOB64); 
         System.out.println(sql);   
         
         // Case INSERT INTO        
-        sql = rf.get_INSERT_INTO(Entidad_Ejemplo.class, null, "?");
+        sql = rf.get_INSERT_INTO("APEX", Entidad_Ejemplo.class, null, "?");
         System.out.println(sql);
-        sql = rf.get_INSERT_INTO(Entidad_Ejemplo.class, null, "?", EUpperLower.UPPER);
+        sql = rf.get_INSERT_INTO(null, Entidad_Ejemplo.class, null, "?", EUpperLower.UPPER);
         System.out.println(sql);           
         String[] exclds = {"id", "email"};        
-        sql = rf.get_INSERT_INTO(Entidad_Ejemplo.class, exclds, "?", EUpperLower.UPPER);
+        sql = rf.get_INSERT_INTO("TEXAS", Entidad_Ejemplo.class, exclds, "?", EUpperLower.UPPER);
         System.out.println(sql);   
         
         // Case Delete         
         var arrDELWH1 = new ArrayList<WhereOperParam>(); 
         arrDELWH1.add(new WhereOperParam("id", "=", "?"));
-        sql = rf.get_DELETE(Entidad_Ejemplo.class, arrDELWH1);
+        sql = rf.get_DELETE("NORTE", Entidad_Ejemplo.class, arrDELWH1);
         System.out.println(sql);         
         var arrDELWH2 = new ArrayList<WhereOperParam>(); 
         arrDELWH2.add(new WhereOperParam("id", "=", "?"));
-        sql = rf.get_DELETE(Entidad_Ejemplo.class, arrDELWH1, EUpperLower.UPPER);
+        sql = rf.get_DELETE(null, Entidad_Ejemplo.class, arrDELWH1, EUpperLower.UPPER);
         System.out.println(sql); 
         
         // Case UPDATE        
         var arrUPDWH1 = new ArrayList<WhereOperParam>(); 
         arrUPDWH1.add(new WhereOperParam("id", "=", "?"));
-        sql = rf.get_UPDATE(Entidad_Ejemplo.class, arrUPDWH1);
+        sql = rf.get_UPDATE("RTP", Entidad_Ejemplo.class, arrUPDWH1);
         System.out.println(sql);         
         var arrUPDWH2 = new ArrayList<WhereOperParam>(); 
         arrUPDWH2.add(new WhereOperParam("id", "=", "?"));
         arrUPDWH2.add(new WhereOperParam("nombre", "=", "?"));        
-        sql = rf.get_UPDATE(Entidad_Ejemplo.class, arrUPDWH2);
+        sql = rf.get_UPDATE(null, Entidad_Ejemplo.class, arrUPDWH2);
         System.out.println(sql);           
-        sql = rf.get_UPDATE(Entidad_Ejemplo.class, arrUPDWH2, EUpperLower.UPPER);
+        sql = rf.get_UPDATE("SO", Entidad_Ejemplo.class, arrUPDWH2, EUpperLower.UPPER);
         System.out.println(sql);
     }
 }
